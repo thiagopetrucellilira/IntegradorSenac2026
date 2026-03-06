@@ -15,6 +15,7 @@ A plataforma visa otimizar o processo de doações, garantindo que os itens enco
 
 ### 👥 Integrantes do Grupo
 
+- **David Marao Spungin**
 - **Iago Pedro da Silva**
 - **Kalani Klafke de Lemos Perin**
 - **Sidney de Oliveira Junior**
