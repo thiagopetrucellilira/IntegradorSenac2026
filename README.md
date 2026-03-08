@@ -1,12 +1,12 @@
 # Plataforma de Doações Locais
 
-**PROJETO INTEGRADOR IV: DESENVOLVIMENTO DE SISTEMAS ORIENTADO A DISPOSITIVOS MÓVEIS E BASEADOS NA WEB**
+**PROJETO INTEGRADOR V: ANÁLISE DE SOLUÇÕES INTEGRADAS PARA ORGANIZAÇÕES**
 
 Uma plataforma web que conecta doadores, instituições sociais e pessoas em situação de vulnerabilidade para facilitar a doação de itens pessoais de forma local, prática e transparente.
 
 ## 🎯 Sobre o Projeto
 
-A plataforma visa otimizar o processo de doações, garantindo que itens encontrem as pessoas que mais precisam deles. Através da conexão direta entre doadores e beneficiários, o projeto promove:
+A plataforma visa otimizar o processo de doações, garantindo que os itens encontrem as pessoas que mais precisam deles. Através da conexão direta entre doadores e beneficiários, o projeto promove:
 
 - **Impacto direto**: Doações chegam a quem realmente precisa
 - **Comunidade local**: Foco em proximidade geográfica para facilitar entregas
@@ -257,7 +257,7 @@ Para contribuir com o projeto:
 
 ## 📝 Licença
 
-Este projeto foi desenvolvido como parte do **Projeto Integrador IV** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas** do **SENAC EAD**.
+Este projeto foi desenvolvido como parte do **Projeto Integrador V** do curso de **Tecnologia em Análise e Desenvolvimento de Sistemas** do **SENAC EAD**.
 
 ---
 
@@ -266,4 +266,4 @@ Este projeto foi desenvolvido como parte do **Projeto Integrador IV** do curso d
 Para dúvidas ou sugestões, entre em contato com a equipe de desenvolvimento através do repositório no GitHub.
 
 **SENAC - Serviço Nacional de Aprendizagem Comercial**  
-**EAD - Ensino à Distância - 2025**
+**EAD - Ensino à Distância - 2026**
