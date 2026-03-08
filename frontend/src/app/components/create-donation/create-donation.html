@@ -5,7 +5,7 @@
         <mat-icon>add_circle</mat-icon>
         Criar Nova Doação
       </h1>
-      <p>Compartilhe itens que você não usa mais com quem precisa</p>
+      <p>Doe alimentos para quem mais precisa</p>
     </div>
 
     <mat-card class="donation-form-card">
@@ -22,7 +22,7 @@
             <div class="form-row">
               <mat-form-field class="full-width">
                 <mat-label>Título da doação</mat-label>
-                <input matInput formControlName="title" placeholder="Ex: Roupas infantis em bom estado">
+                <input matInput formControlName="title" placeholder="Ex: Alimentos não perecíveis">
                 <mat-icon matSuffix>title</mat-icon>
                 <mat-error *ngIf="hasFieldError('title')">
                   {{ getFieldError('title') }}
@@ -34,7 +34,7 @@
               <mat-form-field class="full-width">
                 <mat-label>Descrição detalhada</mat-label>
                 <textarea matInput formControlName="description" rows="4" 
-                          placeholder="Descreva os itens, estado de conservação, tamanhos, cores, etc."></textarea>
+                          placeholder="Descreva os alimentos, validade, peso, tipo, etc."></textarea>
                 <mat-error *ngIf="hasFieldError('description')">
                   {{ getFieldError('description') }}
                 </mat-error>
