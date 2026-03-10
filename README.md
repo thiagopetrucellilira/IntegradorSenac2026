@@ -117,7 +117,7 @@ O backend estará disponível em: `http://localhost:8080`
 - Se a aplicação iniciar sem erros e você ver logs do tipo:
   ```
   INFO - DataInitializer: Criando usuários de teste...
-  INFO - DataInitializer: 10 usuários criados com sucesso!
+  INFO - DataInitializer: Usuários criados: 17
   ```
 
 Significa que o banco foi configurado corretamente!
@@ -143,22 +143,15 @@ O frontend estará disponível em: `http://localhost:4200`
 
 ### Para Doadores
 - Cadastro e autenticação segura
-- Publicação de itens para doação
+- Publicação de itens de alimentos para doação
 - Filtro por localização e categoria
-- Agendamento de retirada
 - Acompanhamento do status das doações
 
 ### Para Beneficiários
 - Busca por itens necessários
-- Filtro por localização e tipo de necessidade
+- Filtro por localização e categoria
 - Solicitação de doações
-- Acompanhamento de entregas
-
-### Para Instituições (ONGs)
-- Gestão de doações recebidas
-- Intermediação entre doadores e beneficiários
-- Relatórios de impacto
-- Divulgação de necessidades em tempo real
+- Acompanhamento do status das solicitações
 
 ---
 
@@ -177,15 +170,16 @@ A aplicação utiliza JWT (JSON Web Tokens) para autenticação:
 
 A aplicação inclui um sistema de inicialização automática (`DataInitializer`) que popula o banco com dados de exemplo na primeira execução:
 
-- **10 usuários** (doadores, beneficiários e admins)  
-- **5 doações** de diferentes categorias
-- **2 matches** entre doadores e beneficiários
+- **17 usuários** (1 admin, 8 doadores e 8 solicitantes)
+- **20 doações** de diferentes categorias de alimentos
+- **13 matches** entre doadores e solicitantes
 
 **Usuários de teste disponíveis:**
+- **Administrador Sistema** - `admin@doacoes.com` / Senha: `admin123` (ADMIN)
 - **João Silva Santos** - `joao.silva@email.com` / Senha: `123456` (DONOR)
 - **Maria Fernanda Costa** - `maria.costa@email.com` / Senha: `123456` (DONOR)
 - **Lúcia Maria Santos** - `lucia.santos@email.com` / Senha: `123456` (REQUESTER)
-- **Carlos Eduardo Rocha** - `carlos.rocha@email.com` / Senha: `123456` (ADMIN)
+- **Pedro Henrique Alves** - `pedro.alves@email.com` / Senha: `123456` (REQUESTER)
 
 **⚠️ Nota**: Os dados são criados automaticamente apenas na primeira execução. Se precisar recriar os dados, apague o banco e reinicie a aplicação.
 
@@ -230,8 +224,10 @@ Após iniciar o backend, acesse:
 
 #### **Matches**
 - `POST /api/matches` - Solicitar uma doação
-- `GET /api/matches/my-requests` - Minhas solicitações
-- `GET /api/matches/my-donations` - Solicitações para minhas doações
+- `GET /api/matches/my` - Minhas solicitações enviadas
+- `GET /api/matches/received` - Solicitações recebidas para minhas doações
+- `PUT /api/matches/{id}/status` - Atualizar status de uma solicitação
+- `GET /api/matches/donation/{donationId}` - Listar solicitações de uma doação
 
 ### 💡 Exemplo de Teste Rápido
 

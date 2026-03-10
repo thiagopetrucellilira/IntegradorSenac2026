@@ -1,59 +1,89 @@
-# Frontend
+# Frontend — Plataforma de Doações Locais
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+Interface web desenvolvida com Angular para a plataforma de doações de alimentos. Conecta doadores e beneficiários permitindo publicar, buscar e solicitar doações de forma local e transparente.
 
-## Development server
+## 🛠️ Tecnologias Utilizadas
 
-To start a local development server, run:
+- **Angular 20** — Framework principal
+- **Angular Material** — Biblioteca de componentes UI
+- **TypeScript** — Linguagem de programação
+- **RxJS** — Programação reativa
+- **SCSS** — Pré-processador CSS
+- **Angular CDK** — Utilitários de componentes
 
-```bash
-ng serve
-```
+## 📋 Pré-requisitos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Node.js 18+** — [Download](https://nodejs.org/)
+- **Angular CLI** — `npm install -g @angular/cli`
+- Backend `donations-api` em execução em `http://localhost:8080`
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🔧 Como executar
 
 ```bash
-ng generate --help
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
+npm start
 ```
 
-## Building
+A aplicação estará disponível em: `http://localhost:4200`
 
-To build the project run:
+## 🗺️ Rotas da Aplicação
+
+| Rota | Componente | Proteção |
+|---|---|---|
+| `/` | Home | Pública |
+| `/login` | Login | Pública |
+| `/register` | Register | Pública |
+| `/donations` | Donations | Pública |
+| `/create-donation` | CreateDonation | 🔒 Requer login |
+| `/profile` | Profile | 🔒 Requer login |
+| `/dashboard` | Dashboard | 🔒 Requer login |
+
+> Rotas protegidas redirecionam para `/login` caso o usuário não esteja autenticado (`AuthGuard`).
+
+## 🎨 Componentes Principais
+
+- **Home** — Página inicial com apresentação da plataforma
+- **Login / Register** — Autenticação e cadastro de novos usuários
+- **Donations** — Listagem pública de doações disponíveis com filtros
+- **CreateDonation** — Formulário para publicar uma nova doação de alimento
+- **Dashboard** — Painel do usuário com suas doações e solicitações
+- **Profile** — Visualização e edição do perfil do usuário
+- **Navbar** — Barra de navegação global
+
+## 🔐 Autenticação
+
+O frontend utiliza **JWT** para autenticação:
+- O token é armazenado no `localStorage` após o login
+- O `AuthInterceptor` injeta automaticamente o header `Authorization: Bearer <token>` em todas as requisições ao backend
+- O `AuthGuard` protege rotas que exigem usuário autenticado
+
+## 🌐 Configuração do Backend
+
+A URL da API é definida em `src/environments/environment.ts`:
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api'
+};
+```
+
+Altere `apiUrl` para apontar para a URL de produção quando necessário.
+
+## 🏗️ Build para produção
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Os artefatos de build serão gerados no diretório `dist/`. A build de produção é otimizada automaticamente pelo Angular.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🧪 Testes
 
 ```bash
+# Testes unitários com Karma
 ng test
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

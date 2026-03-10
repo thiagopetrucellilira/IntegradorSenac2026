@@ -38,8 +38,9 @@ No painel do serviço vá em **Variables** e adicione:
 > As variáveis MySQL são injetadas automaticamente pelo Railway ao vincular o banco ao serviço.
 
 **5. Aguardar o deploy**
-- Railway detecta o `railway.toml`, executa `mvn clean package -DskipTests` nos seus servidores e inicia a aplicação
-- Nenhuma instalação de Docker é necessária na sua máquina
+- Railway detecta o `railway.toml` (builder `DOCKERFILE`) e constrói a imagem a partir do `Dockerfile` do projeto
+- O `Dockerfile` realiza um build multi-stage: compila o JAR com Maven na primeira etapa e gera uma imagem JRE enxuta na segunda
+- Nenhuma instalação de Docker é necessária na sua máquina — Railway executa tudo em nuvem
 - O health check em `/actuator/health` confirma que a API está no ar
 - A URL pública será exibida no painel (ex: `https://sua-api.up.railway.app`)
 
@@ -85,10 +86,8 @@ GET https://sua-api.up.railway.app/swagger-ui/index.html
 - **Spring Boot 3.1.5**
 - **Spring Security** (Autenticação JWT)
 - **Spring Data JPA** (Persistência)
-- **H2 Database** (Banco em memória para desenvolvimento)
-- **MySQL** (Banco para produção)
+- **MySQL** (Banco de dados para desenvolvimento e produção)
 - **SpringDoc OpenAPI** (Documentação Swagger)
-- **ModelMapper** (Mapeamento de DTOs)
 - **Maven** (Gerenciamento de dependências)
 
 ## 📋 Pré-requisitos
@@ -111,16 +110,12 @@ GET https://sua-api.up.railway.app/swagger-ui/index.html
 
 3. **Acesse a aplicação**
    - API: http://localhost:8080
-   - Swagger UI: http://localhost:8080/swagger-ui.html
-   - Console H2: http://localhost:8080/h2-console
-     - JDBC URL: `jdbc:h2:mem:testdb`
-     - Username: `sa`
-     - Password: `password`
+   - Swagger UI: http://localhost:8080/swagger-ui/index.html
 
 ## 📖 Documentação da API
 
 A documentação completa da API está disponível através do Swagger UI em:
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui/index.html
 
 ### Autenticação
 
@@ -138,11 +133,13 @@ A API utiliza autenticação JWT. Para acessar endpoints protegidos:
      "name": "João Silva",
      "email": "joao@email.com",
      "password": "senha123",
-     "phone": "11999999999",
+     "role": "DONOR",
+     "phone": "(11) 99999-9999",
      "city": "São Paulo",
      "state": "SP"
    }
    ```
+   > Valores válidos para `role`: `DONOR`, `REQUESTER`, `ADMIN`
 
 2. **Fazer login:**
    ```json
@@ -158,38 +155,29 @@ A API utiliza autenticação JWT. Para acessar endpoints protegidos:
    POST /api/donations
    Authorization: Bearer {token}
    {
-     "title": "Roupas de inverno",
-     "description": "Casacos e blusas em bom estado",
-     "category": "Roupas",
-     "condition": "Usado - Bom estado",
-     "quantity": 5,
+     "title": "Cesta Básica Completa",
+     "description": "Arroz 5kg, feijão 1kg, óleo 2L, macarrão 500g, açúcar 1kg. Todos dentro do prazo de validade.",
+     "category": "GRAOS_CEREAIS",
+     "quantity": 3,
+     "perishable": false,
+     "expirationDate": "2026-06-01",
      "city": "São Paulo",
      "state": "SP"
    }
    ```
+   > Categorias disponíveis: `GRAOS_CEREAIS`, `HORTIFRUTI`, `LATICINIOS`, `PROTEINAS`, `ENLATADOS_CONSERVAS`, `BEBIDAS`, `PADARIA_CONFEITARIA`, `TEMPEROS_CONDIMENTOS`, `REFEICAO_PRONTA`, `OUTROS`
 
 ## 🗄️ Banco de Dados
 
 ### Para Desenvolvimento
-- Utiliza H2 Database em memória
-- Dados são perdidos ao reiniciar a aplicação
-- Console disponível em: http://localhost:8080/h2-console
+- Utiliza **MySQL** (padrão configurado em `application.properties`)
+- Crie o banco antes de iniciar: `CREATE DATABASE donations_db;`
+- As tabelas são criadas automaticamente pelo Hibernate (`ddl-auto=update`)
+- O `DataInitializer` popula o banco com dados de teste na primeira execução (apenas se estiver vazio)
 
-### Para Produção
-- Configure MySQL no `application.yml`
-- Altere as propriedades de datasource:
-  ```yaml
-  spring:
-    datasource:
-      url: jdbc:mysql://localhost:3306/donation_db
-      username: seu_usuario
-      password: sua_senha
-      driver-class-name: com.mysql.cj.jdbc.Driver
-    jpa:
-      database-platform: org.hibernate.dialect.MySQLDialect
-      hibernate:
-        ddl-auto: update
-  ```
+### Para Produção (Railway)
+- As variáveis de ambiente `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER`, `MYSQLPASSWORD` são injetadas automaticamente pelo Railway ao vincular um banco MySQL
+- Configure também `JWT_SECRET` e `SPRING_PROFILES_ACTIVE=prod` no painel de variáveis do serviço
 
 ## 🔒 Segurança
 
