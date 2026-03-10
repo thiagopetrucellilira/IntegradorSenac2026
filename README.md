@@ -15,7 +15,6 @@ A plataforma visa otimizar o processo de doações, garantindo que os alimentos 
 
 ### 👥 Integrantes do Grupo
 
-- **David Marao Spungin**
 - **Iago Pedro da Silva**
 - **Kalani Klafke de Lemos Perin**
 - **Sidney de Oliveira Junior**
@@ -47,7 +46,7 @@ A plataforma visa otimizar o processo de doações, garantindo que os alimentos 
 ## 📁 Estrutura do Projeto
 
 ```
-IntegradorSenac2025/
+IntegradorSenac2026/
 ├── frontend/                    # Aplicação Angular
 │   ├── src/
 │   │   ├── app/                # Componentes da aplicação
@@ -265,7 +264,7 @@ Este projeto foi desenvolvido como parte do **Projeto Integrador V** do curso de
 
 Para dúvidas ou sugestões, entre em contato com a equipe de desenvolvimento através do repositório no GitHub.
 
-https://thiagopetrucellilira.github.io/IntegradorSenac2026/
+[https://thiagopetrucellilira.github.io/IntegradorSenac2026/](https://github.com/thiagopetrucellilira/IntegradorSenac2026)
 
 **SENAC - Serviço Nacional de Aprendizagem Comercial**  
 **EAD - Ensino à Distância - 2026**
